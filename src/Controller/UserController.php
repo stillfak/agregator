@@ -12,7 +12,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 class UserController extends FOSRestController
 {
     /**
-     * @Rest\Get("/users", name="users")
+     * @Rest\Get("/api/auth/user", name="users")
      */
     public function getAction()
     {
@@ -22,20 +22,20 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/create", name="user")
+     * @Rest\Post("/api/reg/user", name="user")
      * @param Request $request
      * @return Response
      */
 
     public function createunit(Request $request)
     {
-        $movie = new User();
-        $form = $this->createForm(UserType::class, $movie);
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
         $data = json_decode($request->getContent(), true);
         $form->submit($data);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($movie);
+            $em->persist($user);
             $em->flush();
             return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
         }

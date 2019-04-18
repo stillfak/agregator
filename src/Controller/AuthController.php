@@ -10,6 +10,13 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class AuthController extends AbstractController
 {
+    /**
+     * @Rest\Get("/api/auth/user", name="users")
+     * @param UserAuthAuthenticator $authenticator
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param Request $request
+     * @return null|\Symfony\Component\HttpFoundation\Response
+     */
     public function register(UserAuthAuthenticator $authenticator, GuardAuthenticatorHandler $guardHandler, Request $request)
     {
         // ...
